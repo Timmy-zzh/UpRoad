@@ -1,13 +1,25 @@
 package com.timmy.uproad
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.timmy.dataalg.R
+import android.content.Intent
+import com.timmy.libbase.base.activity.BaseVbActivity
+import com.timmy.uproad.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : BaseVbActivity<ActivityMainBinding>() {
+
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        setContentView(R.layout.activity_main)
+//    }
+
+    override fun initData() {
+    }
+
+    override fun initListener() {
+        binding.jumpToSecond.setOnClickListener {
+            startActivity(Intent(this, SecondVbVmActivity::class.java))
+
+
+        }
     }
 
 

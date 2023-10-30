@@ -23,8 +23,9 @@ ext {
     // 依赖库
     libs = [
             // 系统库
+            core_ktx        : "androidx.core:core-ktx:1.8.0",
             appcompat       : "androidx.appcompat:appcompat:1.6.1",
-            material        : "com.google.android.material:material:1.5.0",
+            material        : "com.google.android.material:material:1.10.0",
             constraintlayout: "androidx.constraintlayout:constraintlayout:2.1.4",
 
             room_runtime    : "androidx.room:room-runtime:${versions.room_version}",

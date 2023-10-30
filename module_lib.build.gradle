@@ -1,24 +1,16 @@
-plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-}
-
-android {
-    androidApp(it,
-            'com.timmy.uproad',
-            "com.timmy.uproad")
-
-//    namespace 'com.timmy.uproad'
-//    compileSdk 33
+//plugins {
+//    id 'com.android.library'
+//    id 'org.jetbrains.kotlin.android'
+//}
 //
+//android {
+//    namespace 'com.timmy.libcom'
+//    compileSdk rootProject.ext.android.compileSdkVersion
 //    defaultConfig {
-//        applicationId "com.timmy.uproad"
-//        minSdk 24
-//        targetSdk 33
-//        versionCode 1
-//        versionName "1.0"
-//
+//        minSdkVersion rootProject.ext.android.minSdkVersion
+//        targetSdkVersion rootProject.ext.android.targetSdkVersion
 //        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//        consumerProguardFiles "consumer-rules.pro"
 //    }
 //
 //    buildTypes {
@@ -34,23 +26,16 @@ android {
 //    kotlinOptions {
 //        jvmTarget = '1.8'
 //    }
-}
-
-dependencies {
-
+//    viewBinding {
+//        enabled = true
+//    }
+//}
+//
+//dependencies {
 //    implementation 'androidx.core:core-ktx:1.8.0'
 //    implementation 'androidx.appcompat:appcompat:1.6.1'
-//    implementation 'com.google.android.material:material:1.5.0'
-//    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-//
+//    implementation 'com.google.android.material:material:1.10.0'
 //    testImplementation 'junit:junit:4.13.2'
 //    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
 //    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-
-    commonLibDependencies(it)
-    implementation project(":libs:lib_base")
-
-
-
-
-}
+//}
