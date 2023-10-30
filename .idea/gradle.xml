@@ -16,6 +16,8 @@
             <option value="$PROJECT_DIR$/basics/DataAlg" />
             <option value="$PROJECT_DIR$/libs" />
             <option value="$PROJECT_DIR$/libs/lib_base" />
+            <option value="$PROJECT_DIR$/practices" />
+            <option value="$PROJECT_DIR$/practices/practice_room" />
           </set>
         </option>
       </GradleProjectSettings>
