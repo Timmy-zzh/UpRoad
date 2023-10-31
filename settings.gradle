@@ -16,4 +16,4 @@ rootProject.name = "UpRoad"
 include ':app'
 include ':basics:DataAlg'
 include ':libs:lib_base'
-include ':practices:practice_room'
+include ':practices:practice_jetpack'

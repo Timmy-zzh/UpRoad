@@ -16,6 +16,7 @@ class User {
         const val TABLE_NAME = "user"
         const val COLUMN_ID = "id"
         const val COLUMN_NAME = "name"
+        const val COLUMN_ADDRESS = "address"
         const val COLUMN_AGE = "age"
     }
 
@@ -27,13 +28,21 @@ class User {
 
     // 字段-名称
     @ColumnInfo(name = COLUMN_NAME)
-    val aName: String? = null
+    var uName: String? = null
 
     @ColumnInfo(name = COLUMN_AGE)
-    val uAge: Int = 0
+    var uAge: Int = 0
+
+    @ColumnInfo(name = COLUMN_ADDRESS)
+    var uAddress: String? = null
 
     @Ignore
     var uSex: Int = 0
+    override fun toString(): String {
+        return "User(uId=$uId, uName=$uName, uAge=$uAge, uAddress=$uAddress, uSex=$uSex)"
+    }
+
+
 }
 
 
