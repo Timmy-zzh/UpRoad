@@ -9,10 +9,10 @@ import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import com.timmy.libbase.base.activity.BaseVbActivity
+import com.timmy.upload.home.MainActivity
 import com.timmy.uproad.databinding.ActivitySplashBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart

@@ -1,17 +1,17 @@
-package com.timmy.uproad
+package com.timmy.upload.home
 
 import com.timmy.libbase.base.activity.BaseVbVmActivity
-import com.timmy.uproad.databinding.ActivitySecondBinding
+import com.timmy.upload.home.databinding.ActivitySecondBinding
 
 class SecondVbVmActivity : BaseVbVmActivity<ActivitySecondBinding, SecondeViewModel>() {
 
     override fun initListener() {
-        binding.tvContent.text = "ABC"
+        mBinding.tvContent.text = "ABC"
 
     }
 
     override fun initData() {
-        viewModel.initData("1222")
+        mViewModel.initData("1222")
     }
 
 }

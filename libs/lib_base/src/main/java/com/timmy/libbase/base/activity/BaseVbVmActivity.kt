@@ -11,10 +11,10 @@ import com.timmy.libbase.ext.inflateViewBindingWithGeneric
 abstract class BaseVbVmActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatActivity() {
 
     private var _viewModel: VM? = null
-    val viewModel: VM get() = _viewModel!!
+    val mViewModel: VM get() = _viewModel!!
 
     private var _binding: VB? = null
-    val binding: VB get() = _binding!!
+    val mBinding: VB get() = _binding!!
 
     abstract fun initListener()
     abstract fun initData()
@@ -23,7 +23,7 @@ abstract class BaseVbVmActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompa
         super.onCreate(savedInstanceState)
         inflateVB()
         reflectVM()
-        setContentView(binding.root)
+        setContentView(mBinding.root)
         initListener()
         initData()
     }

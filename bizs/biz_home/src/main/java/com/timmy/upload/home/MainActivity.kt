@@ -1,8 +1,8 @@
-package com.timmy.uproad
+package com.timmy.upload.home
 
 import android.content.Intent
 import com.timmy.libbase.base.activity.BaseVbActivity
-import com.timmy.uproad.databinding.ActivityMainBinding
+import com.timmy.upload.home.databinding.ActivityMainBinding
 
 class MainActivity : BaseVbActivity<ActivityMainBinding>() {
 

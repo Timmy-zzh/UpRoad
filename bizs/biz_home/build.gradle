@@ -4,9 +4,10 @@ plugins {
 }
 
 android {
-    androidLib(it, 'com.timmy.lib.base')
+    androidLib(it, 'com.timmy.upload.home')
 }
 
 dependencies {
     commonLibDependencies(it)
+    implementation project(":libs:lib_base")
 }
