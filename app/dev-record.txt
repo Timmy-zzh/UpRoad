@@ -1,0 +1,7 @@
+231101
+1、闪屏页
+- 启动白屏问题
+- 倒计时
+2、主页 MainActivity
+- Bottom多个Fragment
+- 网络请求封装：Retrofit

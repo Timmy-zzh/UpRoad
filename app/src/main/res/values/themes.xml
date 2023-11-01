@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.UpRoad" parent="Base.Theme.UpRoad" />
+
+    <style name="Theme.Launcher" parent="Base.Theme.UpRoad">
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/launcher_layer_list</item>
+    </style>
 </resources>

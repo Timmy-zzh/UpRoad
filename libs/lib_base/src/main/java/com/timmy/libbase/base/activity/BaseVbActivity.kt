@@ -13,15 +13,19 @@ import com.timmy.libbase.ext.inflateViewBindingWithGeneric
 abstract class BaseVbActivity<VB : ViewBinding> : AppCompatActivity() {
 
     private var _binding: VB? = null
-    val binding: VB get() = _binding!!
+    val mBinding: VB get() = _binding!!
 
-    abstract fun initListener()
+    companion object {
+        var TAG = this::class.java.javaClass.simpleName
+    }
+
+    open fun initListener() {}
     abstract fun initData()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         inflateVB()
-        setContentView(binding.root)
+        setContentView(mBinding.root)
         initListener()
         initData()
     }

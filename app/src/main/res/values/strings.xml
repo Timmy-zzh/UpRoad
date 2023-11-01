@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">UpRoad</string>
+    <string name="count_down_time">剩余(%ss)</string>
 </resources>

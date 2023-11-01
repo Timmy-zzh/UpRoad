@@ -15,7 +15,7 @@ class MainActivity : BaseVbActivity<ActivityMainBinding>() {
     }
 
     override fun initListener() {
-        binding.jumpToSecond.setOnClickListener {
+        mBinding.jumpToSecond.setOnClickListener {
             startActivity(Intent(this, SecondVbVmActivity::class.java))
 
 
