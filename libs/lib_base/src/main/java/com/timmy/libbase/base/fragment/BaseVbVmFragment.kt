@@ -5,14 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
+import com.timmy.libbase.base.vm.BaseViewModel
+import com.timmy.libbase.ext.getVmClazz
 import com.timmy.libbase.ext.inflateViewBindingWithGeneric
 
-abstract class BaseVbFragment<VB : ViewBinding> : Fragment() {
+abstract class BaseVbVmFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment() {
+
+    private var _viewModel: VM? = null
+    val mViewModel: VM get() = _viewModel!!
 
     private var _binding: VB? = null
-    val binding: VB get() = _binding!!
-
+    val mBinding: VB get() = _binding!!
     open fun initListener() {}
     abstract fun initData()
 
@@ -27,13 +32,15 @@ abstract class BaseVbFragment<VB : ViewBinding> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _viewModel = ViewModelProvider(this)[getVmClazz(this)]
         initListener()
         initData()
     }
 
+
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        _viewModel = null
     }
 
 }

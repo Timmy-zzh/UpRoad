@@ -5,6 +5,8 @@ plugins {
 
 android {
     androidLib(it, 'com.timmy.upload.home')
+    // 定义模块资源前缀名，防止资源名称重复
+    resourcePrefix "home_"
 }
 
 dependencies {

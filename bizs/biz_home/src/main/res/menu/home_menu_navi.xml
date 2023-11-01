@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_home"
+        android:checked="true"
+        android:icon="@mipmap/ic_monitor"
+        android:title="WanAndroid" />
+    <item
+        android:id="@+id/action_ai"
+        android:icon="@mipmap/ic_gift"
+        android:title="AIGC" />
+    <item
+        android:id="@+id/action_category"
+        android:icon="@mipmap/ic_category"
+        android:title="知识体系" />
+    <item
+        android:id="@+id/action_find"
+        android:icon="@mipmap/ic_find"
+        android:title="发现" />
+    <item
+        android:id="@+id/action_me"
+        android:icon="@mipmap/ic_setting"
+        android:title="个人中心" />
+
+</menu>

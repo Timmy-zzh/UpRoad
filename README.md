@@ -6,6 +6,7 @@
 ###### 1.1 框架
 - 组件化（ARouter）
 - Dagger
+- LiveData
 ###### 1.2 JetPack
 - Room
 ##### 2、Android学习：
