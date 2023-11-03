@@ -22,17 +22,18 @@ ext {
     // 依赖库
     libs = [
             // 系统库
-            core_ktx        : "androidx.core:core-ktx:1.8.0",
-            appcompat       : "androidx.appcompat:appcompat:1.6.1",
-            material        : "com.google.android.material:material:1.10.0",
-            constraintlayout: "androidx.constraintlayout:constraintlayout:2.1.4",
+            core_ktx                : "androidx.core:core-ktx:1.8.0",
+            appcompat               : "androidx.appcompat:appcompat:1.6.1",
+            material                : "com.google.android.material:material:1.10.0",
+            constraintlayout        : "androidx.constraintlayout:constraintlayout:2.1.4",
 
-            room_runtime    : "androidx.room:room-runtime:${versions.room_version}",
-            room_compiler   : "androidx.room:room-compiler:${versions.room_version}",
+            room_runtime            : "androidx.room:room-runtime:${versions.room_version}",
+            room_compiler           : "androidx.room:room-compiler:${versions.room_version}",
             // net
-            retrofit2       : "com.squareup.retrofit2:retrofit:${versions.retrofit2_version}",
+            retrofit2               : "com.squareup.retrofit2:retrofit:${versions.retrofit2_version}",
+            retrofit2_converter_gson: "com.squareup.retrofit2:converter-gson:${versions.retrofit2_version}",
 
-            paging_runtime  : "androidx.paging:paging-runtime:2.1.1",
+            paging_runtime          : "androidx.paging:paging-runtime:2.1.1",
 
     ]
 }

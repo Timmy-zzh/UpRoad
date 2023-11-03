@@ -2,6 +2,7 @@ package com.timmy.libbase.net
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 class RetrofitFactory private constructor() {
@@ -16,14 +17,14 @@ class RetrofitFactory private constructor() {
     init {
         retrofit = Retrofit.Builder()
             .baseUrl(URL_BASE)
-//            .addConverterFactory(GsonConvertFactory.create)
+            .addConverterFactory(GsonConverterFactory.create())
             .client(initOkHttpClient())
             .build()
     }
 
     private fun initOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(null)
+//            .addInterceptor(null)
             .connectTimeout(5, TimeUnit.SECONDS)
             .readTimeout(5, TimeUnit.SECONDS)
             .build()

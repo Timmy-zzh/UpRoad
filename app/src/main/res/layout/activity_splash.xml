@@ -13,7 +13,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginRight="40dp"
         android:textColor="@color/white"
-        android:textSize="26sp"
+        android:textSize="20sp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="跳过(3s)" />

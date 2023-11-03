@@ -5,11 +5,12 @@ plugins {
 
 android {
     androidLib(it, 'com.timmy.lib.base')
+    resourcePrefix "base_"
 }
 
 dependencies {
     commonLibDependencies(it)
     api libs.retrofit2
-    api "com.squareup.retrofit2:converter-gson:2.9.0"
+    api libs.retrofit2_converter_gson
 
 }

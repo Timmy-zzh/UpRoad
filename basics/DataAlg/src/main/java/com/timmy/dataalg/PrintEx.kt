@@ -1,6 +1,6 @@
 package com.timmy.dataalg
 
-import com.example.leetcode.bean.ListNode
+import com.timmy.dataalg.bean.ListNode
 import java.util.Stack
 
 fun List<Int>.print() {

@@ -1,6 +1,6 @@
 package com.timmy.dataalg._02linked
 
-import com.example.leetcode.bean.ListNode
+import com.timmy.dataalg.bean.ListNode
 import com.timmy.dataalg.print
 
 /**

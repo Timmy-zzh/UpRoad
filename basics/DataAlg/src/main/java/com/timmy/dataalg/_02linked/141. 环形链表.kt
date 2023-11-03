@@ -1,6 +1,6 @@
 package com.timmy.dataalg._02linked
 
-import com.example.leetcode.bean.ListNode
+import com.timmy.dataalg.bean.ListNode
 
 /**
  * 给你一个链表的头节点 head ，判断链表中是否有环。
