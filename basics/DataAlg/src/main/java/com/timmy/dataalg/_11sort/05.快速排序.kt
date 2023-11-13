@@ -1,4 +1,4 @@
-package com.timmy.dataalg.sort
+package com.timmy.dataalg._11sort
 
 import com.timmy.dataalg.print
 
