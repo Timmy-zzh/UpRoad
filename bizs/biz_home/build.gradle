@@ -12,4 +12,5 @@ android {
 dependencies {
     commonLibDependencies(it)
     implementation project(":libs:lib_base")
+    implementation libs.okhttp
 }

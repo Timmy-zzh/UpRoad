@@ -35,5 +35,7 @@ ext {
 
             paging_runtime          : "androidx.paging:paging-runtime:2.1.1",
 
+            okhttp                  : "com.squareup.okhttp3:okhttp:4.11.0",
+
     ]
 }

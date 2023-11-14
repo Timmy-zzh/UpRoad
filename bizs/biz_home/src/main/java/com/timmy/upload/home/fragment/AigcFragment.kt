@@ -5,6 +5,7 @@ import com.timmy.libbase.base.activity.BaseVbVmActivity
 import com.timmy.libbase.base.fragment.BaseVbVmFragment
 import com.timmy.upload.home.databinding.HomeAigcBinding
 import com.timmy.upload.home.vm.AigcViewModel
+import okhttp3.OkHttpClient
 
 class AigcFragment : BaseVbVmFragment<HomeAigcBinding, AigcViewModel>() {
 
@@ -19,5 +20,6 @@ class AigcFragment : BaseVbVmFragment<HomeAigcBinding, AigcViewModel>() {
     }
 
     override fun initData() {
+        val okHttpClient = OkHttpClient.Builder().build()
     }
 }
