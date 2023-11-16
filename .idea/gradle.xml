@@ -20,6 +20,8 @@
             <option value="$PROJECT_DIR$/libs/lib_base" />
             <option value="$PROJECT_DIR$/practices" />
             <option value="$PROJECT_DIR$/practices/practice_jetpack" />
+            <option value="$PROJECT_DIR$/practices/workdemo-compose" />
+            <option value="$PROJECT_DIR$/practices/workdemo2" />
           </set>
         </option>
       </GradleProjectSettings>
