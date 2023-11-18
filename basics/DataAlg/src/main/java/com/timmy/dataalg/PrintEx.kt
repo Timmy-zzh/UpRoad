@@ -3,6 +3,18 @@ package com.timmy.dataalg
 import com.timmy.dataalg.bean.ListNode
 import java.util.Stack
 
+//fun List<List<Int>>.print() {
+//    print("[")
+//    this.forEach { it ->
+//        print("[")
+//        it.forEach { item ->
+//            print("$item ,")
+//        }
+//        print("],")
+//    }
+//    println("]")
+//}
+
 fun List<Int>.print() {
     this.forEach {
         print("$it ,")
