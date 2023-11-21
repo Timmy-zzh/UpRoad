@@ -1,4 +1,4 @@
-package com.timmy.dataalg._06binarytree
+package com.timmy.dataalg._06tree
 
 import com.timmy.dataalg.bean.TreeNode
 

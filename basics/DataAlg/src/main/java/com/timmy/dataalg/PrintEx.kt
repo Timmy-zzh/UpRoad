@@ -15,6 +15,18 @@ import java.util.Stack
 //    println("]")
 //}
 
+fun Array<BooleanArray>.print() {
+    println("[")
+    this.forEach { it ->
+        print("[")
+        it.forEach { item ->
+            print("$item ,")
+        }
+        println("],")
+    }
+    println("]")
+}
+
 fun List<Int>.print() {
     this.forEach {
         print("$it ,")
