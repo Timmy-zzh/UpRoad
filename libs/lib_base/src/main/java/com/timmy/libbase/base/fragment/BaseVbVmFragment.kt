@@ -18,14 +18,10 @@ abstract class BaseVbVmFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment
 
     private var _binding: VB? = null
     val mBinding: VB get() = _binding!!
-    open fun initListener() {}
-    abstract fun initData()
+    abstract fun init()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?): View? {
         _binding = inflateViewBindingWithGeneric(inflater, container, false)
         return _binding!!.root
     }
@@ -33,8 +29,7 @@ abstract class BaseVbVmFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _viewModel = ViewModelProvider(this)[getVmClazz(this)]
-        initListener()
-        initData()
+        init()
     }
 
 

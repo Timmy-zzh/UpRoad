@@ -1,6 +1,7 @@
 package com.timmy.upload.home.api
 
 import com.timmy.libbase.base.bean.BaseResult
+import com.timmy.upload.home.bean.AtricleList
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -13,7 +14,7 @@ interface WanService {
      * 参数：页码，拼接在连接中，从0开始。
      */
     @GET("article/list/{page}/json")
-    suspend fun getAtricleList(@Path("page") page: Int): BaseResult<>
+    suspend fun getArticleList(@Path("page") page: Int = 0): BaseResult<AtricleList>
 
     /**
      * 1.2 首页banner

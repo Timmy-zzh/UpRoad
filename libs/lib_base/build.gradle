@@ -12,5 +12,6 @@ dependencies {
     commonLibDependencies(it)
     api libs.retrofit2
     api libs.retrofit2_converter_gson
+    api libs.logging_interceptor
 
 }

@@ -1,6 +1,7 @@
 package com.timmy.libbase.net
 
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -15,19 +16,16 @@ class RetrofitFactory private constructor() {
     }
 
     init {
-        retrofit = Retrofit.Builder()
-            .baseUrl(URL_BASE)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(initOkHttpClient())
-            .build()
+        retrofit =
+            Retrofit.Builder().baseUrl(URL_BASE).addConverterFactory(GsonConverterFactory.create())
+                .client(initOkHttpClient()).build()
     }
 
     private fun initOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-//            .addInterceptor(null)
-            .connectTimeout(5, TimeUnit.SECONDS)
-            .readTimeout(5, TimeUnit.SECONDS)
-            .build()
+            .addInterceptor(
+            HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) })
+            .connectTimeout(5, TimeUnit.SECONDS).readTimeout(5, TimeUnit.SECONDS).build()
     }
 
     fun <T> createService(service: Class<T>): T {

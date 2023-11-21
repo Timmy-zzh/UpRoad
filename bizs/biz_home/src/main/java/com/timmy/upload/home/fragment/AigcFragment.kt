@@ -27,14 +27,10 @@ class AigcFragment : BaseVbVmFragment<HomeAigcBinding, AigcViewModel>() {
         }
     }
 
-    override fun initListener() {
+    override fun init() {
 
-    }
-
-    override fun initData() {
-
-        httpGet()
-        httpPost()
+//        httpGet()
+//        httpPost()
 
     }
 
@@ -54,7 +50,7 @@ class AigcFragment : BaseVbVmFragment<HomeAigcBinding, AigcViewModel>() {
         val mediaType = "application/json; charset=utf-8".toMediaType()
         val body: RequestBody = json.toString().toRequestBody(mediaType)
 
-        val request: Request = Request.Builder().url("www.baidu.com").post(body).build()
+        val request: Request = Request.Builder().url("https://www.baidu.com").post(body).build()
         val newCall: Call = okHttpClient.newCall(request)
         newCall.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -72,7 +68,7 @@ class AigcFragment : BaseVbVmFragment<HomeAigcBinding, AigcViewModel>() {
 
         val okHttpClient = OkHttpClient()
 
-        val request: Request = Request.Builder().url("www.baidu.com").build()
+        val request: Request = Request.Builder().url("https://www.baidu.com").build()
 
         val newCall: Call = okHttpClient.newCall(request)
 
