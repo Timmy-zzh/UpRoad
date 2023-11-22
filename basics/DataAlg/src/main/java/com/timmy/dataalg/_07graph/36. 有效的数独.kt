@@ -7,17 +7,12 @@ package com.timmy.dataalg._07graph
 数字 1-9 在每一列只能出现一次。
 数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。（请参考示例图）
 
-
 注意：
-
 一个有效的数独（部分已被填充）不一定是可解的。
 只需要根据以上规则，验证已经填入的数字是否有效即可。
 空白格用 '.' 表示。
 
-
 示例 1：
-
-
 输入：board =
 [["5","3",".",".","7",".",".",".","."]
 ,["6",".",".","1","9","5",".",".","."]
@@ -29,8 +24,8 @@ package com.timmy.dataalg._07graph
 ,[".",".",".","4","1","9",".",".","5"]
 ,[".",".",".",".","8",".",".","7","9"]]
 输出：true
-示例 2：
 
+示例 2：
 输入：board =
 [["8","3",".",".","7",".",".",".","."]
 ,["6",".",".","1","9","5",".",".","."]
@@ -46,8 +41,89 @@ package com.timmy.dataalg._07graph
 
  */
 fun main() {
+    val board = arrayOf(charArrayOf('5', '3', '.', '.', '7', '.', '.', '.', '.'),
+        charArrayOf('6', '.', '.', '1', '9', '5', '.', '.', '.'),
+        charArrayOf('.', '9', '8', '.', '.', '.', '.', '6', '.'),
+        charArrayOf('8', '.', '.', '.', '6', '.', '.', '.', '3'),
+        charArrayOf('4', '.', '.', '8', '.', '3', '.', '.', '1'),
+        charArrayOf('7', '.', '.', '.', '2', '.', '.', '.', '6'),
+        charArrayOf('.', '6', '.', '.', '.', '.', '2', '8', '.'),
+        charArrayOf('.', '.', '.', '4', '1', '9', '.', '.', '5'),
+        charArrayOf('.', '.', '.', '.', '8', '.', '.', '7', '9'))
+    val res = isValidSudoku(board)
+    println("res=$res")
 }
 
+/**
+ * 1、审题：输入一个字符数组用于标识数独，验证给出的数组是否符合数独的规则
+ * - 一个正确的数独有三个规则：每行每列都包含1到9，一共九个数字，且不能出现重复复
+ * - 数独又单独分开为九个小单元格，小单元中也是包含着1到9共九个数字
+ * 2、解题：
+ * - 只想到了递归的解法，使用一个包含九个元素的boolean数组，标识每行、每列和小单元格中的元素是否存在重复，
+ * - 如果已经标识存在给元素，又出现了，那就不是合格的数独，否则是ok的
+ * 3、优化解法
+ * - 使用二个，二维数组记录每行，每列中数字出现的次数
+ * - 小单元格使用三维数组记录
+ */
 fun isValidSudoku(board: Array<CharArray>): Boolean {
-    return false
+    val width = board.size
+    val height = board[0].size
+
+    // 创建一个数组，包含9个元素，每个元素的值都是false
+    //    val visited = Array(10) { false }
+
+    for (i in 0 until width) {
+        var visited = Array(10) { false }
+
+        // 每行
+        for (j in 0 until width) {
+            val ch = board[i][j]
+            if (ch != '.') {
+                val num = ch - '0'
+                if (visited[num]) {
+                    return false
+                } else {
+                    visited[num] = true
+                }
+            }
+        }
+
+        // 每列
+        visited = Array(10) { false }
+        for (j in 0 until width) {
+            val ch = board[j][i]
+            if (ch != '.') {
+                val num = ch - '0'
+                if (visited[num]) {
+                    return false
+                } else {
+                    visited[num] = true
+                }
+            }
+        }
+
+        // 每个小单元格
+        for (j in 0 until width) {
+            if (i % 3 == 0 && j % 3 == 0) {
+                println("-- i=$i,j=$j")
+                visited = Array(10) { false } // 自己的小循环中遍历
+                for (w in i..i + 2) {
+                    for (h in j..j + 2) {
+                        println("w=$w,h=$h")
+                        val ch = board[w][h]
+                        if (ch != '.') {
+                            val num = ch - '0'
+                            if (visited[num]) {
+                                return false
+                            } else {
+                                visited[num] = true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return true
 }

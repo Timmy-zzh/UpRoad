@@ -41,6 +41,13 @@ fun IntArray.print() {
     println()
 }
 
+fun CharArray.print() {
+    this.forEach {
+        print("$it ,")
+    }
+    println()
+}
+
 fun Map<String, Int>.print() {
     this.forEach {
         println("${it.key}:${it.value},")
