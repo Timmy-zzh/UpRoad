@@ -1,4 +1,4 @@
-package com.timmy.dataalg._13binarysearch
+package com.timmy.dataalg._12binarysearch
 
 fun main() {
     val arr = intArrayOf(2, 5, 6, 7, 11, 18)
