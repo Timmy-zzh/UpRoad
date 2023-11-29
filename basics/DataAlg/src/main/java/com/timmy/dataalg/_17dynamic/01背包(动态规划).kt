@@ -42,16 +42,23 @@ fun call01BackpackDynamic() {
         }
 
         //  放入背包
-        for (j in 0..w) { // 第i个物品不放入背包
+        for (j in 0..w) { // 第i个物品放入背包
             if (status[i - 1][j] && j + weights[i] <= w) {
                 status[i][j + weights[i]] = true
             }
         }
+
+        // 优化写法，不好理解，算了
+        //        for (j in 0..w - weights[i]) { // 第i个物品放入背包
+        //            if (status[i - 1][j]) {
+        //                status[i][j + weights[i]] = true
+        //            }
+        //        }
     }
     status.print()
 
-    for (ww in 9 downTo 0){
-        if (status[4][ww]){
+    for (ww in 9 downTo 0) {
+        if (status[4][ww]) {
             println("MaxWeight:$ww")
             break
         }
@@ -66,7 +73,7 @@ fun call01BackpackDynamicV2() {
     val n = 5
     val w = 9
     var maxW = Int.MIN_VALUE
-    var status =BooleanArray(10) { false }
+    var status = BooleanArray(10) { false }
 
     status.print()
 
@@ -77,14 +84,7 @@ fun call01BackpackDynamicV2() {
     }
 
     for (i in 1 until 5) {
-        for (j in 0..w) { // 第i个物品不放入背包
-            if (status[j]) {
-                status[j] = true
-            }
-        }
-
-        //  放入背包
-        for (j in 0..w) { // 第i个物品不放入背包
+        for (j in 0..w) { // 第i个物品放入背包
             if (status[j] && j + weights[i] <= w) {
                 status[j + weights[i]] = true
             }
@@ -92,8 +92,8 @@ fun call01BackpackDynamicV2() {
     }
     status.print()
 
-    for (ww in 9 downTo 0){
-        if (status[ww]){
+    for (ww in 9 downTo 0) {
+        if (status[ww]) {
             println("MaxWeight:$ww")
             break
         }

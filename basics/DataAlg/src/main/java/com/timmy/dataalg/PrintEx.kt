@@ -23,6 +23,18 @@ fun BooleanArray.print() {
     println("]")
 }
 
+fun Array<IntArray>.print() {
+    println("[")
+    this.forEach { it ->
+        print("[")
+        it.forEach { item ->
+            print("$item ,")
+        }
+        println("],")
+    }
+    println("]")
+}
+
 fun Array<BooleanArray>.print() {
     println("[")
     this.forEach { it ->
