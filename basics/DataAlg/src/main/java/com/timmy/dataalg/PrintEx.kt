@@ -1,5 +1,6 @@
 package com.timmy.dataalg
 
+import com.timmy.dataalg._17dynamic.paths
 import com.timmy.dataalg.bean.ListNode
 import java.util.Stack
 
@@ -21,6 +22,13 @@ fun BooleanArray.print() {
         print("$it ,")
     }
     println("]")
+}
+
+fun ArrayList<IntArray>.printPath() {
+    for (path in this) {
+        print("${path[0]}:${path[1]}, path:${path[2]} ->")
+    }
+    println()
 }
 
 fun Array<IntArray>.print() {
