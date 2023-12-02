@@ -1,7 +1,10 @@
 package com.timmy.dataalg
 
+import com.timmy.dataalg._06tree.traversalMid
+import com.timmy.dataalg._06tree.traversalPre
 import com.timmy.dataalg._17dynamic.paths
 import com.timmy.dataalg.bean.ListNode
+import com.timmy.dataalg.bean.TreeNode
 import java.util.Stack
 
 //fun List<List<Int>>.print() {
@@ -15,6 +18,21 @@ import java.util.Stack
 //    }
 //    println("]")
 //}
+
+/**
+ * 前序遍历
+ */
+fun TreeNode.preTraversal() {
+    val list = mutableListOf<Int>()
+    traversalPre(this, list)
+    list.print()
+}
+
+fun TreeNode.midTraversal() {
+    val list = mutableListOf<Int>()
+    traversalMid(this, list)
+    list.print()
+}
 
 fun BooleanArray.print() {
     print("[")

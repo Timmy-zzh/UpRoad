@@ -11,6 +11,16 @@ class TreeNode(val `val`: Int) {
         this.right = right
     }
 
+    constructor(`val`: Int, leftVal: Int?, right: TreeNode?) : this(`val`) {
+        this.left = if (leftVal != null) TreeNode(leftVal) else null
+        this.right = right
+    }
+
+    constructor(`val`: Int, left: TreeNode?, rightVal: Int?) : this(`val`) {
+        this.left = left
+        this.right =  if (rightVal != null) TreeNode(rightVal) else null
+    }
+
     constructor(`val`: Int, leftVal: Int?, rightVal: Int?) : this(`val`) {
         this.left = if (leftVal != null) TreeNode(leftVal) else null
         this.right = if (rightVal != null) TreeNode(rightVal) else null
