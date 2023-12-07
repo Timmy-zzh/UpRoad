@@ -25,6 +25,7 @@ fun main() {
  * - 两层遍历法
  * --外层遍历确定子串的左侧位置，内层遍历从子串左侧位置开始往后遍历，拿到子串的左右位置
  * --求该子串是否是回文串，是的话求解最长子串的长度并返回
+ * 3、总结：动态规划解法
  */
 fun longestPalindrome(s: String): String {
     val len = s.length
