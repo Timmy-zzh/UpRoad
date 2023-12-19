@@ -1,5 +1,6 @@
 package com.timmy.dataalg._13string
 
+import com.timmy.dataalg.print
 import java.util.Stack
 
 /**
@@ -58,9 +59,59 @@ import java.util.Stack
 由于 "4193" 在范围 [-231, 231 - 1] 内，最终结果为 4193 。
 
  */
-fun main() { //    val res = myAtoi("   -42")
+fun main() { //    val res = myAtoi("-91283472332")
+    //    val res = myAtoi("2147483648")
+
+    //    val res = myAtoi("   -42")
     val res = myAtoi("4193 with words")
     println(res)
+}
+
+
+/**
+ * 总结：
+ * - 不使用long类型，只使用int类型保存结果值，并在计算过程中判断边界值
+ * - res每次在原有基础上翻10倍，
+ * - 遍历过程中注意结束位置
+ */
+fun myAtoi(s: String): Int {
+    var sign = 1    // 标识正负号
+    var step = 1    // 乘与的倍数
+    var res = 0
+    for (i in s.indices) {
+        val ch = s[i]
+        if (ch == '-' && i + 1 < s.length && isNum(s[i + 1])) {
+            sign = -1
+        } else if (ch == '+' && i + 1 < s.length && isNum(s[i + 1])) {
+            sign = 1
+        } else if (ch == ' ') { // 为空继续遍历
+            continue
+        } else if (!isNum(ch)) { // 字母或其他字符，直接return
+            break
+        } else { // 数字
+            val num = ch - '0'
+
+            /**
+             * 在原来基础上剩余10，并加上新的数字num
+             * - 判断
+             */
+            if (res > Int.MAX_VALUE / 10 || (res == Int.MAX_VALUE / 10 && num > Int.MAX_VALUE % 10)) { // 再乘与10，肯定大于maxvalue
+                return if (sign == 1) {
+                    Int.MAX_VALUE
+                } else {
+                    Int.MIN_VALUE
+                }
+            }
+
+            res = res * 10 + num
+            println("num:$num, res:$res,step:$step")
+
+            if (i + 1 < s.length && !isNum(s[i + 1])) { // 下一个字符不是数字
+                break
+            }
+        }
+    }
+    return res * sign
 }
 
 /**
@@ -68,18 +119,22 @@ fun main() { //    val res = myAtoi("   -42")
  * 2、解题：
  * - 遍历字符串，遇到空格和字母，反正只要不是数字的直接过滤
  * - 遍历到正负号，需要判断下一位是否是数组
+ * 3、不能使用long类型，需要在从栈中取出字符的过程中，进行判断，怎么判断呢？
+ * - 将最大值除于10，如果已经
  */
-fun myAtoi(s: String): Int {
+fun myAtoi2(s: String): Int {
     var isZheng = true
     val stack = Stack<Int>()
     for (i in s.indices) {
         val ch = s[i]
         if (ch == '-' && i + 1 < s.length && isNum(s[i + 1])) {
             isZheng = false
+        } else if (ch == '+' && i + 1 < s.length && isNum(s[i + 1])) {
+            isZheng = true
         } else if (ch == ' ') { // 为空继续遍历
             continue
         } else if (!isNum(ch)) { // 字母或其他字符，直接return
-            return 0
+            break
         } else { // 数字
             stack.push(ch - '0')
             if (i + 1 < s.length && !isNum(s[i + 1])) { // 下一个字符不是数字
@@ -88,22 +143,25 @@ fun myAtoi(s: String): Int {
         }
     }
 
-    // 取出栈中的数字，组成数字
+    stack.print() // 取出栈中的数字，组成数字
     var step = 1
     var res = 0
     while (stack.isNotEmpty()) {
         val num = stack.pop()
+
+        // 处理越界情况
+        if ((res + num * step) > Int.MAX_VALUE) {
+            return if (isZheng) {
+                Int.MAX_VALUE
+            } else {
+                Int.MIN_VALUE
+            }
+        }
         res += num * step
         step *= 10
     }
     if (!isZheng) {
-        res = -1
-    }
-    if (res > Int.MAX_VALUE) {
-        return Int.MAX_VALUE
-    }
-    if (res < Int.MIN_VALUE) {
-        return Int.MIN_VALUE
+        res *= -1
     }
     return res
 }
