@@ -1,4 +1,4 @@
-package com.timmy.dataalg._17dynamic
+package com.timmy.dataalg.leetcode
 
 /**
  * 给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 '.' 和 '*' 的正则表达式匹配。
@@ -22,11 +22,23 @@ package com.timmy.dataalg._17dynamic
 解释：".*" 表示可匹配零个或多个（'*'）任意字符（'.'）。
  */
 fun main() {
-//    isMatch("aa", "a")
+//            isMatch("aa", "a")
 //    isMatch("aa", "a*")
-//    isMatch("ab", ".*")
-    isMatch("aab", "c*a*b")
+//        isMatch("ab", ".*")
+//        isMatch("aab", "c*a*b")
+        isMatch("mississippi", "mis*is*p*.")
     println("isMatch:$isMatch")
+}
+
+/**
+ * 解法：动态规划，状态转移方程式
+ * -
+ */
+fun isMatch(s: String, p: String): Boolean {
+    println("s=$s,p=$p")
+    isMatch = false
+    strMatch(0, 0, s, p)
+    return isMatch
 }
 
 /**
@@ -37,9 +49,15 @@ fun main() {
  * - 同时遍历字符串s和正则p，都从第0个开始，判断遍历到的正则字符如果是字符.,则匹配字符串任意一个字符
  * -- 如果遍历到正则是字符*，则匹配0个或任意多个字符，这时候可以遍历字符串后面的所有字符拿过来比较
  * - 最后当两个字符遍历到最后结束时，进行判断是否匹配
+ * 3、审题问题：
+ * - 题目的意思是字符* 可以匹配前面的哪一个元素零个或多个，是存在限制的，限制的是只能匹配字符*前面的哪个字符
+ * -- 匹配零个是什么意思呢？让前面哪个字符消失，
+ * 4、虽然理解了题意
+ * - 但使用回溯算法，还是写不出来，实现不了*匹配的多个前面字符的情况，还是要使用动态规划解法
  */
 var isMatch = false
-fun isMatch(s: String, p: String): Boolean {
+fun isMatch2(s: String, p: String): Boolean {
+    println("s=$s,p=$p")
     isMatch = false
     strMatch(0, 0, s, p)
     return isMatch
@@ -51,11 +69,14 @@ fun isMatch(s: String, p: String): Boolean {
  * isMatch("aab", "c*a*b") 结果既然为true，还是没搞懂咋出题的
  */
 fun strMatch(si: Int, pi: Int, str: String, p: String) {
-    val sl = str.length
-    val pl = p.length
-    println("si=$si,sl=$sl,  pi=$pi,pl=$pl")
-    if (si == sl || pi == pl) {
-        if (si == sl && pi == pl) {
+    val sLen = str.length
+    val pLen = p.length
+    println("si=$si,sLen=$sLen,  pi=$pi,pLen=$pLen")
+    if (isMatch) {
+        return
+    }
+    if (si == sLen || pi == pLen) {
+        if (si == sLen && pi == pLen) {
             isMatch = true
         }
         return
@@ -67,12 +88,12 @@ fun strMatch(si: Int, pi: Int, str: String, p: String) {
     } else if (pC == '.') {
         strMatch(si + 1, pi + 1, str, p)
     } else if (pC == '*') {
-        for (j in si..sl) { // p一个*字符，匹配零个或多个s字符
+        strMatch(si, pi + 1, str, p)  // 匹配0个，将前面的哪个字符去掉
+        for (j in si + 1..sLen) { // p一个*字符，匹配多个前面的字符
             strMatch(j, pi + 1, str, p)
         }
     } else {
-        isMatch = false
-        return
+        strMatch(si, pi + 1, str, p)    // 模式串自己走
     }
 }
 
