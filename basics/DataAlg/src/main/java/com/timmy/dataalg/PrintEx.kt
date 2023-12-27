@@ -73,7 +73,14 @@ fun Array<BooleanArray>.print() {
     println("]")
 }
 
-fun List<Int>.print() {
+//fun List<Int>.print() {
+//    this.forEach {
+//        print("$it ,")
+//    }
+//    println()
+//}
+
+fun List<Any>.print() {
     this.forEach {
         print("$it ,")
     }
