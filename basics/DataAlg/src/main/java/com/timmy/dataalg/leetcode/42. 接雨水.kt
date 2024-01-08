@@ -1,6 +1,8 @@
 package com.timmy.dataalg.leetcode
 
 import com.timmy.dataalg.print
+import kotlin.math.max
+import kotlin.math.min
 
 /**
  * 给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
@@ -23,13 +25,43 @@ fun main() {
  * 1、审题
  * - 输入一个数组，数组的元素大小可以看成柱子的高度，柱子之间可以形成容器空间，用来接雨水
  * - 求這些数组形成的容器，可以接收的最大雨水量
- * 2、解题
- * - 两层遍历法，外层遍历查找单个容器的左侧高度，内层循环查找容器右侧高度
- * - 查找的左侧高度，需要比右侧高度要高，可能存在覆盖的问题，所以采用dp[i]的方式保存，动态变化容器的雨水量
- * 3、按行递增计算
- * - 去掉第三层循环，在第二层循环基础上，使用一个参数标记左侧是否存在阻挡，
+ * 2、还不够高效，使用动态规划解法
+ * - 我们在遍历柱子i的时候，当前柱子能装多少水，取决于柱子的左右两侧是否有阻挡？
+ * -- 如果在柱子i的左右两侧都有比他更高的柱子时，当前柱子就可以装水，且水的多少是左右柱子最小值减去当前柱子的高度
+ * - 通过动态规划dp数组，用来保存区域的最大值，也就是dp[i] 表示在区域[0,i]范围的最大值，这样就能快速的拿到在位置i时，左侧的最大值
+ * -- 同样dp[i] 右侧[i,size]也通过同样规则，计算出右侧最大值
+ * 3、其他解法： 单调栈
  */
 fun trap(height: IntArray): Int {
+    height.print()
+    val size = height.size
+    if (size < 3) {
+        return 0
+    }
+    var res = 0
+    val leftMax = IntArray(size) { 0 }
+    leftMax[0] = height[0]
+    for (i in 1 until size) {
+        leftMax[i] = max(leftMax[i - 1], height[i])
+    }
+
+    val rightMax = IntArray(size) { 0 }
+    rightMax[size - 1] = height[size - 1]
+    for (i in size - 2 downTo 0) {
+        rightMax[i] = max(rightMax[i + 1], height[i])
+    }
+
+    leftMax.print()
+    rightMax.print()
+
+    for (i in 0 until size) {
+        res += min(leftMax[i], rightMax[i]) - height[i]
+    }
+
+    return res
+}
+
+fun trap3(height: IntArray): Int {
     height.print()
     val size = height.size
     if (size < 3) {
