@@ -30,9 +30,9 @@ fun main() {
     //        val res =  isMatch1("cb", "?a")
     //    val res = isMatch1("adceb", "*a*b")
     //      val res =    isMatch1("", "******")
-    val res = isMatch1("abcabczzzde",
-        "*abc???de*") //    val res =  isMatch1("acdcb", "a*c?b") //    val res =
-    //        isMatch1("bbbababbbbabbbbababbaaabbaababbbaabbbaaaabbbaaaabb", "*b********bb*b*bbbbb*ba") // 超出时间限制
+    //    val res = isMatch1("abcabczzzde", "*abc???de*")
+    //    val res = isMatch1("acdcb", "a*c?b")
+    val res = isMatch1("bbbababbbbabbbbababbaaabbaababbbaabbbaaaabbbaaaabb", "*b********bb*b*bbbbb*ba") // 超出时间限制
     println("res:$res")
 }
 
@@ -42,6 +42,12 @@ fun main() {
  * - 先处理好第一行，然后根据前面的结果判断下一行
  * -- 这比之前的模式串匹配情况要简单很多了
  * - 注意dp以主串和模式串的长度作为比较标准
+ * 总结：这个地方有点没转过弯弯来呢？？？
+ * - 当模式串为通配符*时，他可以匹配零个或多个主串字符，
+ * -- 匹配0个字符时，模式串位置减1，可以理解为通配符前面的字符串与当前的主串子串进行匹配，也就是模式串减少一位，主串不变的位置dp值
+ * --- 也即是 dp[pi][sj] = dp[pi-1][sj]
+ * -- 匹配多个字符，也就是使用这个星*，也就是主串位置不变，模式串匹配值与左侧位置字符相同
+ * --- dp[pi][sj] = dp[pi][sj-1]
  */
 fun isMatch1(s: String, p: String): Boolean {
     println("s:$s, p:$p")
@@ -70,13 +76,14 @@ fun isMatch1(s: String, p: String): Boolean {
         val pCh = p[pj - 1] // 模式串字符
         if (pCh == '*') {   // 只有*才有必要处理
             dp[pj][0] = dp[pj - 1][0]
+        } else {
+            break
         }
     }
     dp.print()
 
     for (pi in 1..pLen) {
-        for (sj in 1..sLen) {
-//            println("pi:$pi, sj:$sj")
+        for (sj in 1..sLen) { //            println("pi:$pi, sj:$sj")
             val pCh = p[pi - 1] // 模式串字符
             val sCh = s[sj - 1] // 模式串字符
             if (pCh == '?') {

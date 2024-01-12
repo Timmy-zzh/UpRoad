@@ -86,6 +86,12 @@ fun List<Any>.print() {
     }
     println()
 }
+fun MutableSet<Int>.print() {
+    this.forEach {
+        print("$it ,")
+    }
+    println()
+}
 
 fun IntArray.print() {
     this.forEach {
