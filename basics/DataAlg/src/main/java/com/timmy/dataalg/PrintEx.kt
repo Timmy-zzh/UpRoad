@@ -7,17 +7,20 @@ import com.timmy.dataalg.bean.ListNode
 import com.timmy.dataalg.bean.TreeNode
 import java.util.Stack
 
-//fun List<List<Int>>.print() {
+//fun List<*>.print() {
 //    print("[")
-//    this.forEach { it ->
-//        print("[")
-//        it.forEach { item ->
-//            print("$item ,")
-//        }
-//        print("],")
+//    this.forEach {
+//        print("$it,")
 //    }
 //    println("]")
 //}
+fun Array<*>.print() {
+    print("[")
+    this.forEach {
+        print("$it,")
+    }
+    println("]")
+}
 
 /**
  * 前序遍历
@@ -73,19 +76,13 @@ fun Array<BooleanArray>.print() {
     println("]")
 }
 
-//fun List<Int>.print() {
-//    this.forEach {
-//        print("$it ,")
-//    }
-//    println()
-//}
-
 fun List<Any>.print() {
     this.forEach {
-        print("$it ,")
+        print("${it.toString()} ,")
     }
     println()
 }
+
 fun MutableSet<Int>.print() {
     this.forEach {
         print("$it ,")
