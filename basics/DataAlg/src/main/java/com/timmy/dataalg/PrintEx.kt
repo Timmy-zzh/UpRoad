@@ -7,13 +7,22 @@ import com.timmy.dataalg.bean.ListNode
 import com.timmy.dataalg.bean.TreeNode
 import java.util.Stack
 
-//fun List<*>.print() {
-//    print("[")
-//    this.forEach {
-//        print("$it,")
-//    }
-//    println("]")
-//}
+/**
+ * 创建默认二维数组有固定值：
+val matirx = arrayOf(
+intArrayOf(1, 2, 3),
+intArrayOf(4, 5, 6),
+intArrayOf(7, 8, 9),
+)
+ */
+
+/**
+ * 创建相同值得默认二维数组
+val marked = Array(m) {
+BooleanArray(n) { false }
+}
+ */
+
 fun Array<*>.print() {
     print("[")
     this.forEach {

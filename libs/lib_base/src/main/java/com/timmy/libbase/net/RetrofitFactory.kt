@@ -17,15 +17,21 @@ class RetrofitFactory private constructor() {
 
     init {
         retrofit =
-            Retrofit.Builder().baseUrl(URL_BASE).addConverterFactory(GsonConverterFactory.create())
-                .client(initOkHttpClient()).build()
+            Retrofit.Builder()
+                .baseUrl(URL_BASE)
+                .client(initOkHttpClient())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
     }
 
     private fun initOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(
-            HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) })
-            .connectTimeout(5, TimeUnit.SECONDS).readTimeout(5, TimeUnit.SECONDS).build()
+                HttpLoggingInterceptor()
+                    .apply { setLevel(HttpLoggingInterceptor.Level.BODY) })
+            .connectTimeout(5, TimeUnit.SECONDS)
+            .readTimeout(5, TimeUnit.SECONDS)
+            .build()
     }
 
     fun <T> createService(service: Class<T>): T {
