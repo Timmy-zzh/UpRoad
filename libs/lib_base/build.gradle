@@ -14,4 +14,7 @@ dependencies {
     api libs.retrofit2_converter_gson
     api libs.logging_interceptor
 
+    api 'io.reactivex.rxjava3:rxandroid:3.0.2'
+    api 'io.reactivex.rxjava3:rxjava:3.1.5'
+
 }
