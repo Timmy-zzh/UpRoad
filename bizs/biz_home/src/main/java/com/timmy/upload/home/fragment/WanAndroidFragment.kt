@@ -9,9 +9,12 @@ import com.timmy.upload.home.databinding.HomeFragmentWanAndroidBinding
 import com.timmy.upload.home.vm.WanAndroidViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.ObservableEmitter
+import io.reactivex.rxjava3.core.ObservableOnSubscribe
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.function.Consumer
 import java.util.function.Function
@@ -51,6 +54,11 @@ class WanAndroidFragment : BaseVbVmFragment<HomeFragmentWanAndroidBinding, WanAn
      * RxJava学习使用
      */
     private fun studyRxJava() {
+
+        // 拦截实现者，全局监听，先交给自己设置的Observable进行处理
+        RxJavaPlugins.setOnObservableAssembly {
+            it
+        }
 
         Observable.create<String> {     // create 创建被观察者
             it.onNext("1")
@@ -115,6 +123,29 @@ class WanAndroidFragment : BaseVbVmFragment<HomeFragmentWanAndroidBinding, WanAn
                 println(it)
             }
 
+        Observable.create(object :ObservableOnSubscribe<String>{
+            override fun subscribe(emitter: ObservableEmitter<String>) {
+                // 发射
+                emitter.onNext("111")
+            }
+        })
+            .subscribe(object :Observer<String>{
+                override fun onSubscribe(d: Disposable) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onError(e: Throwable) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onComplete() {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onNext(t: String) {
+                    TODO("Not yet implemented")
+                }
+            })
     }
 }
 
