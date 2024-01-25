@@ -81,8 +81,7 @@ class WanAndroidFragment : BaseVbVmFragment<HomeFragmentWanAndroidBinding, WanAn
             }
         })
 
-        Observable
-            .just(1, 2, 3)
+        Observable.just(1, 2, 3)
             .subscribeOn(Schedulers.newThread())  // 给上面切换到子线程
             .observeOn(AndroidSchedulers.mainThread()) // 给下面切换到主线程
             .subscribe(object : Observer<Int> {
@@ -103,16 +102,6 @@ class WanAndroidFragment : BaseVbVmFragment<HomeFragmentWanAndroidBinding, WanAn
                 }
             })
 
-        Observable.just(1, 2, 3)
-            .map { // int类型变成String类型数据
-            val t = it + 2
-            "res:$t"
-        }
-            .subscribeOn(Schedulers.newThread())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-            println(it)
-        }
 
 
         Observable.just(1, 2, 3)
@@ -123,29 +112,60 @@ class WanAndroidFragment : BaseVbVmFragment<HomeFragmentWanAndroidBinding, WanAn
                 println(it)
             }
 
-        Observable.create(object :ObservableOnSubscribe<String>{
-            override fun subscribe(emitter: ObservableEmitter<String>) {
-                // 发射
-                emitter.onNext("111")
+        // eg1
+        Observable.create(object : ObservableOnSubscribe<String> {
+            override fun subscribe(emitter: ObservableEmitter<String>) { // 发射
+                emitter.onNext("11")
+                emitter.onNext("12")
+                emitter.onNext("13")
+            }
+        }).subscribe(object : Observer<String> {
+            override fun onSubscribe(d: Disposable) {
+                println("onSubscribe")
+            }
+
+            override fun onError(e: Throwable) {
+                println("onError:$e")
+            }
+
+            override fun onComplete() {
+                println("onComplete")
+            }
+
+            override fun onNext(t: String) {
+                println("onNext:$t")
             }
         })
-            .subscribe(object :Observer<String>{
-                override fun onSubscribe(d: Disposable) {
-                    TODO("Not yet implemented")
-                }
 
-                override fun onError(e: Throwable) {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onComplete() {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onNext(t: String) {
-                    TODO("Not yet implemented")
+        // eg2 map操作符
+        Observable.create(object : ObservableOnSubscribe<String> {
+                override fun subscribe(emitter: ObservableEmitter<String>) { // 发射
+                    emitter.onNext("21")
+                    emitter.onNext("22")
+                    emitter.onNext("23")
                 }
             })
+            .map { // int类型变成String类型数据
+                val t = it + 2
+                "res:$t"
+            }
+            .subscribe(object : Observer<String> {
+            override fun onSubscribe(d: Disposable) {
+                println("onSubscribe")
+            }
+
+            override fun onError(e: Throwable) {
+                println("onError:$e")
+            }
+
+            override fun onComplete() {
+                println("onComplete")
+            }
+
+            override fun onNext(t: String) {
+                println("onNext:$t")
+            }
+        })
     }
 }
 
