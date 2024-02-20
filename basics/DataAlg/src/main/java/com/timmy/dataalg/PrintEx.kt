@@ -46,6 +46,37 @@ fun TreeNode.midTraversal() {
     list.print()
 }
 
+/**
+ * 层序遍历
+ */
+fun TreeNode?.levelOrder() {
+    val resList = arrayListOf<List<Int>>()
+
+    val nodeList = arrayListOf<TreeNode?>()
+    if (this != null) nodeList.add(this)
+
+    while (nodeList.isNotEmpty()) {
+
+        val size = nodeList.size
+        var itemList = arrayListOf<Int>()
+        for (i in 0 until size) {
+            val node = nodeList.removeFirst()
+            itemList.add(node!!.`val`)
+
+            if (node.left != null) {
+                nodeList.add(node.left)
+            }
+            if (node.right != null) {
+                nodeList.add(node.right)
+            }
+        }
+
+        resList.add(itemList)
+    }
+
+    resList.print()
+}
+
 fun BooleanArray.print() {
     print("[")
     this.forEach {

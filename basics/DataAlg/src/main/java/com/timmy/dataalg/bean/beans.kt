@@ -4,7 +4,18 @@ class ListNode(val `val`: Int) {
     var next: ListNode? = null
 }
 
-class TreeNode(val `val`: Int) {
+class Node() {
+    var `val`: Int = 0
+    var left: Node? = null
+    var right: Node? = null
+    var next: Node? = null
+}
+
+class TreeNode() {
+
+    constructor(`val`: Int) : this() {
+        this.`val` = `val`
+    }
 
     constructor(`val`: Int, left: TreeNode?, right: TreeNode?) : this(`val`) {
         this.left = left
@@ -18,7 +29,7 @@ class TreeNode(val `val`: Int) {
 
     constructor(`val`: Int, left: TreeNode?, rightVal: Int?) : this(`val`) {
         this.left = left
-        this.right =  if (rightVal != null) TreeNode(rightVal) else null
+        this.right = if (rightVal != null) TreeNode(rightVal) else null
     }
 
     constructor(`val`: Int, leftVal: Int?, rightVal: Int?) : this(`val`) {
@@ -26,6 +37,7 @@ class TreeNode(val `val`: Int) {
         this.right = if (rightVal != null) TreeNode(rightVal) else null
     }
 
+    var `val`: Int = 0
     var left: TreeNode? = null
     var right: TreeNode? = null
 }
