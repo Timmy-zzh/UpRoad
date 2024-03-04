@@ -27,7 +27,7 @@ public class GenericsTest {
 //        print(appleGenertor);
 //        print(orangeGenertor);
 
-        Genertor<? extends Fruit>  genertor1 = new Genertor<>();
+        Genertor<? extends Fruit> genertor1 = new Genertor<>();
 //        genertor1.setData(new Apple());
         Fruit data3 = genertor1.getData();
 
@@ -46,6 +46,12 @@ public class GenericsTest {
         Genertor<? super Fruit> genertor = new Genertor<>();
         Object data2 = genertor.getData();
 //         genertor.setData(new Food()); 报错
+
+        Fruit fruit = new Apple();
+//        Genertor<Fruit> fruitGenertor1 = new Genertor<Apple>();
+        Genertor<? extends Fruit> fruitGenertor1 = new Genertor<Apple>();
+
+        Genertor<? super Apple> fruitGenertor2 = new Genertor<Fruit>();
     }
 
     private static void print(Genertor<Fruit> t) {

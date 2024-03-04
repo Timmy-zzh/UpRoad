@@ -62,6 +62,7 @@ fun main() {
  * --第一层是判断队列是否为空
  * --不为空，则从队列中取出访问到的当层所有元素，每层遍历，就是一次查询
  * --从当层找出的所有元素，与集合中的元素，比较是否相差一个元素，符合条件的添加到队列中，继续下一层遍历查找
+ * - bfs解法，先要想清楚，才能写出来
  */
 fun ladderLength(beginWord: String, endWord: String, wordList: List<String>): Int {
     var res = 1

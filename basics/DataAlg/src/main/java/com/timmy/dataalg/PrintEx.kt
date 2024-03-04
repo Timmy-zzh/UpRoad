@@ -2,7 +2,6 @@ package com.timmy.dataalg
 
 import com.timmy.dataalg._06tree.traversalMid
 import com.timmy.dataalg._06tree.traversalPre
-import com.timmy.dataalg._17dynamic.paths
 import com.timmy.dataalg.bean.ListNode
 import com.timmy.dataalg.bean.TreeNode
 import java.util.Stack
@@ -92,6 +91,18 @@ fun ArrayList<IntArray>.printPath() {
     println()
 }
 
+fun Array<CharArray>.print() {
+    println("[")
+    this.forEach { it ->
+        print("[")
+        it.forEach { item ->
+            print("$item ,")
+        }
+        println("],")
+    }
+    println("]")
+}
+
 fun Array<IntArray>.print() {
     println("[")
     this.forEach { it ->
@@ -121,6 +132,18 @@ fun List<Any>.print() {
         print("${it.toString()} ,")
     }
     println()
+}
+
+fun List<List<String>>.printList() {
+    println("[")
+    this.forEach { it ->
+        print("[")
+        it.forEach { item ->
+            print("$item ,")
+        }
+        println("],")
+    }
+    println("]")
 }
 
 fun MutableSet<Int>.print() {
