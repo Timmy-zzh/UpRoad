@@ -4,6 +4,7 @@ import com.timmy.dataalg._06tree.traversalMid
 import com.timmy.dataalg._06tree.traversalPre
 import com.timmy.dataalg.bean.ListNode
 import com.timmy.dataalg.bean.TreeNode
+import com.timmy.dataalg.leetcode.Node
 import java.util.Stack
 
 /**
