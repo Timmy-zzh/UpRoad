@@ -1,4 +1,4 @@
-package com.timmy.javabasic.generics;
+package com.timmy.javabasic._01generics;
 
 public class BingTangXin extends Apple{
 }

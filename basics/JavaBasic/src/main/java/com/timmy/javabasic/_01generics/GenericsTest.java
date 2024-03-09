@@ -1,4 +1,4 @@
-package com.timmy.javabasic.generics;
+package com.timmy.javabasic._01generics;
 
 import java.util.ArrayList;
 import java.util.List;
