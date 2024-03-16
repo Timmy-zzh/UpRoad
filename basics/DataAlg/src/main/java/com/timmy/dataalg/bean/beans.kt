@@ -1,6 +1,6 @@
 package com.timmy.dataalg.bean
 
-class ListNode(val `val`: Int) {
+class ListNode(var `val`: Int) {
     var next: ListNode? = null
 }
 
