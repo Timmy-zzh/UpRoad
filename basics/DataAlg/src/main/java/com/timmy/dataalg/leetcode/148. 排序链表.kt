@@ -41,15 +41,105 @@ fun main() {
 /**
  * 思路2：归并排序
  * - 先拆分，后合并
- * - 两个链表进行合并
+ * -- 如何做拆分呢？
+ * -- 数组是通过二分法，将数组从中间位置mid进行拆分为两个区域，直到两个区域的元素为一，然后进行合并成一个有序的短区域链表，接着递归与其他有序链表进行合并
+ * - 链表也是一样的思想，只不过通过遍历找到中间节点，
+ * -- 两个链表进行合并
  */
 fun sortList(head: ListNode?): ListNode? {
     if (head == null) {
         return null
     }
+    return sortListBack(head, null)
+}
 
+/**
+ * 先拆分，再合并
+ * - 拆分找中间节点位置
+ */
+fun sortListBack(head: ListNode?, tail: ListNode?): ListNode? {
+    println("sortListBack head:${head?.`val`}, tail:${tail?.`val`}")
+    head.print()
+    tail.print()
 
-    return head
+    if (head == null) {
+        return null
+    }
+    if (head == tail) {
+        return head
+    }
+    /**
+     * 这快逻辑怎么处理？
+     * 目标： 往下排序了
+     */
+    if (head.next == tail) {
+        head.next = null  // 断开
+        return mergeCall(head, tail)
+    }
+
+    // 找中间节点
+    var fast: ListNode? = head
+    var slow: ListNode? = head
+    while (fast != tail) {
+        fast = fast?.next
+        slow = slow?.next
+        if (fast != tail) {
+            fast = fast?.next
+        }
+    }
+
+    // 从中间截断
+    val mid = slow
+    println("sortListBack mid:${mid?.`val`}")
+
+    // 继续递归拆分链表区间，最后进行合并成有序的链表
+    val sortHead2 = mid?.next
+    mid?.next = null
+
+    val sortNode1 = sortListBack(head, mid)
+    val sortNode2 = sortListBack(sortHead2, tail)
+
+    return mergeCall(sortNode1, sortNode2)
+}
+
+/**
+ * 合并两个链表
+ * - 遍历两个链表，找到val值更大的结点，并添加到
+ */
+fun mergeCall(sortNode1: ListNode?, sortNode2: ListNode?): ListNode? {
+    println("mergeCall sortNode1:${sortNode1?.`val`},sortNode2:${sortNode2?.`val`}")
+    sortNode1.print()
+    sortNode2.print()
+
+    // 虚拟头结点
+    val emptyNode = ListNode(-1)
+    var tempNode: ListNode? = emptyNode
+    var node1 = sortNode1
+    var node2 = sortNode2
+    while (node1 != null || node2 != null) {
+        var num1 = Int.MAX_VALUE
+        if (node1 != null) {
+            num1 = node1.`val`
+        }
+
+        var num2 = Int.MAX_VALUE
+        if (node2 != null) {
+            num2 = node2.`val`
+        }
+
+        if (num1 < num2) {
+            tempNode?.next = node1
+            node1 = node1?.next
+        } else {
+            tempNode?.next = node2
+            node2 = node2?.next
+        }
+        tempNode = tempNode?.next
+    }
+    println("mergeCall res emptyNode:${emptyNode.next?.`val`}")
+    emptyNode.next.print()
+
+    return emptyNode.next
 }
 
 /**
