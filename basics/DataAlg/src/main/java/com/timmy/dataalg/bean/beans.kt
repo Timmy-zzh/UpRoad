@@ -4,7 +4,7 @@ class ListNode(var `val`: Int) {
     var next: ListNode? = null
 }
 
-class Node() {
+class Node {
     var `val`: Int = 0
     var left: Node? = null
     var right: Node? = null
