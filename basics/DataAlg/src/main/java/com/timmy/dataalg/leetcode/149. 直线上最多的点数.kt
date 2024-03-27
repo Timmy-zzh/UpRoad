@@ -21,22 +21,24 @@ points 中的所有点 互不相同
  */
 fun main() {
 
-    //    val points = arrayOf(intArrayOf(1, 1), intArrayOf(2, 2), intArrayOf(3, 3))
+//        val points = arrayOf(intArrayOf(1, 1), intArrayOf(2, 2), intArrayOf(3, 3))
 
-    //    val points = arrayOf(intArrayOf(0, 0), intArrayOf(1, -1), intArrayOf(1, 1))
+//        val points = arrayOf(intArrayOf(0, 0), intArrayOf(1, -1), intArrayOf(1, 1))
 
     // [[5151,5150],[0,0],[5152,5151]]
-    val points = arrayOf(intArrayOf(5151, 5150), intArrayOf(0, 0), intArrayOf(5152, 5151))
+//    val points = arrayOf(intArrayOf(5151, 5150), intArrayOf(0, 0), intArrayOf(5152, 5151))
 
-    //    val points = arrayOf(
-    //        intArrayOf(1, 1),
-    //        intArrayOf(3, 2),
-    //        intArrayOf(5, 3),
-    //        intArrayOf(4, 1),
-    //        intArrayOf(2, 3),
-    //        intArrayOf(1, 4),
-    //    )
-//    val res = maxPoints1(points)
+        val points = arrayOf(
+            intArrayOf(1, 1),
+            intArrayOf(3, 2),
+            intArrayOf(5, 3),
+            intArrayOf(4, 1),
+            intArrayOf(2, 3),
+            intArrayOf(1, 4),
+        )
+
+
+    //    val res = maxPoints1(points)
     val res = maxPoints(points)
     println("res:$res")
 
@@ -56,6 +58,8 @@ fun main() {
  * - 第三层判断点是否符合表达式
  * - 求取斜率，除数为0的情况判断
  * - 分辨率问题处理
+ * 4、精度问题：
+ * - 将求斜率会出现的精度问题，转变为乘法，就可以避免了
  */
 fun maxPoints(points: Array<IntArray>): Int {
     val n = points.size
@@ -68,33 +72,19 @@ fun maxPoints(points: Array<IntArray>): Int {
         for (j in i + 1 until n) {
             val point1 = points[i]
             val point2 = points[j]
-            var tag = false
-            var k: Double? = null
-            if (point2[0] - point1[0] == 0) {
-                tag = true
-            } else {
-                k = (point2[1] - point1[1]) * 1.0 / (point2[0] - point1[0])
-            }
+
             var itemC = 2 // 遍历其他点
             for (w in 0 until n) {
                 if (w == i || w == j) {
                     continue
                 }
                 val point = points[w]
-                if (tag) {
-                    if (point[0] == point1[0]) {
-                        itemC++
-                        if (itemC > res) {
-                            res = itemC
-                        }
-                    }
-                } else {
-                    val y = k!! * (point[0] - point1[0]) + point1[1]
-                    if (y == point[1].toDouble()) {
-                        itemC++
-                        if (itemC > res) {
-                            res = itemC
-                        }
+                val leftV = (point2[1] - point1[1]) * (point[0] - point1[0])
+                val rightV = (point2[0] - point1[0]) * (point[1] - point1[1])
+                if (leftV == rightV) {
+                    itemC++
+                    if (itemC > res) {
+                        res = itemC
                     }
                 }
             }
@@ -120,17 +110,23 @@ fun maxPoints1(points: Array<IntArray>): Int {
              * - 先求斜率： k = （y2-y1）/(x2-x1)
              * - 直线上其他点（x，y）也符合，该等式， k = (y-y1)/(x-x1)
              * -> y = k*(x-x1) + y1
+             *
+             * 因为求出的斜率k存在精度问题，可以将除法转变为乘法进行计算
+             * （y2-y1）     (y-y1)
+             * --------- = ---------
+             * (x2-x1)      (x-x1)
+             *-->得出等式 （y2-y1）* (x-x1) = (x2-x1) * (y-y1)
              */
-            var tag = false
-            var k: Double? = null
+            var tag = false //            var k: Double? = null
             if (point2[0] - point1[0] == 0) {
                 tag = true
-            } else {
-                k = (point2[1] - point1[1]) * 1.0 / (point2[0] - point1[0])
             }
+
+            //            else {
+            //                k = (point2[1] - point1[1]) * 1.0 / (point2[0] - point1[0])
+            //            }
             point1.print()
-            point2.print()
-            println("for for  k=$k")
+            point2.print() //            println("for for  k=$k")
             var itemC = 2 // 遍历其他点
             for (w in 0 until n) {
                 println("for for for  w=$w,i=$i,j=$j")
@@ -148,9 +144,15 @@ fun maxPoints1(points: Array<IntArray>): Int {
                         }
                     }
                 } else {
-                    val y = k!! * (point[0] - point1[0]) + point1[1]
-                    println("k=$k,y=$y, point[1]=${point[1]}")
-                    if (y == point[1].toDouble()) {
+
+                    //                    val y = k!! * (point[0] - point1[0]) + point1[1]
+                    //                    （y2-y1）* (x-x1) = (x2-x1) * (y-y1)
+                    // 等式左边结果
+                    val leftV = (point2[1] - point1[1]) * (point[0] - point1[0])
+                    val rightV = (point2[0] - point1[0]) * (point[1] - point1[1])
+
+                    println("leftV=$leftV,rightV=$rightV, point[1]=${point[1]}")
+                    if (leftV == rightV) {
                         itemC++
                         if (itemC > res) {
                             res = itemC
