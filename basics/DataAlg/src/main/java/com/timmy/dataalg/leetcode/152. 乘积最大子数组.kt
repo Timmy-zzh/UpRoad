@@ -23,12 +23,40 @@ import kotlin.math.max
 nums 的任何前缀或后缀的乘积都 保证 是一个 32-位 整数
  */
 fun main() { //    val res = maxProduct(intArrayOf(2, 3, -2, 4))
-    //    val res = maxProduct(intArrayOf(-2,0,-1))
-    //    val res = maxProduct(intArrayOf(-3, -1, -1))
-    //    val res = maxProduct(intArrayOf(2, -5, -2, -4, 3))
-    val res = maxProduct(intArrayOf(1, 2, -1, -2, 2, 1, -2, 1, 4, -5,
-        4)) //    val res = maxProduct(intArrayOf(-2, 3, -4))
+    //        val res = maxProduct(intArrayOf(-2,0,-1))
+    //        val res = maxProduct(intArrayOf(-3, -1, -1))
+    //        val res = maxProduct(intArrayOf(2, -5, -2, -4, 3))
+    //        val res = maxProduct(intArrayOf(1, 2, -1, -2, 2, 1, -2, 1, 4, -5, 4))
+    val res = maxProduct(intArrayOf(-2, 3, -4))
     println("res:$res")
+}
+
+/**
+ * 回溯算法实现
+ * - 从第一个元素开始，不断往后叠加到不同位置的元素之积，求积最大的子数组
+ */
+var maxRes: Int = 0
+fun maxProduct(nums: IntArray): Int {
+    val n = nums.size
+    if (n == 1) {
+        return nums[0]
+    }
+    for (j in 0 until n) {
+        maxProductBack(nums[j], j, nums)
+    }
+    return maxRes
+}
+
+fun maxProductBack(res: Int, i: Int, nums: IntArray) {
+    println("maxProductBack res=$res,i=$i")
+    if (res > maxRes) {
+        maxRes = res
+    }
+    if (i == nums.size - 1) {
+        return
+    }
+
+    maxProductBack(res * nums[i + 1], i + 1, nums)
 }
 
 /**
@@ -44,7 +72,7 @@ fun main() { //    val res = maxProduct(intArrayOf(2, 3, -2, 4))
  * -- dp[i-1]*nums[i] >0
  * - 是否需要考虑三个值呢
  */
-fun maxProduct(nums: IntArray): Int {
+fun maxProductDp(nums: IntArray): Int {
     val dp = nums.copyOf()
     dp.print()
     for (i in 1 until nums.size) {
