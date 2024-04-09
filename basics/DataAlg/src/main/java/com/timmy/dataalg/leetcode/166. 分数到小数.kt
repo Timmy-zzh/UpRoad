@@ -52,6 +52,8 @@ fun main() {
  * - 负数处理
  * - 精度问题处理
  * - 小数点位置查询，（不要写成固定的了）
+ * 4、数字规律
+ * - 遇到数字要想到：0处理，正负数，-》范围大小（精度处理）
  */
 fun fractionToDecimal(numerator: Int, denominator: Int): String {
     if (numerator == 0) {
