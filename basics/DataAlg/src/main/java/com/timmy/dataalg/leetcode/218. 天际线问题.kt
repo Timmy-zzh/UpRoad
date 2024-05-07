@@ -35,8 +35,10 @@ heighti 是第 i 座建筑物的高度。
 buildings 按 lefti 非递减排序
  */
 fun main() {
+
 }
 
 fun getSkyline(buildings: Array<IntArray>): List<List<Int>> {
 
+    return listOf()
 }
