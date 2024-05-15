@@ -33,6 +33,7 @@ fun main() {
  * - 回溯法
  * - 对数字n，不断取平方根的值，最不济也能减少1，反正一定有一个结果值
  * - 我们要求一个最小值
+ * 3、还有动态规划解法：
  */
 var res279 = Int.MAX_VALUE
 fun numSquares(n: Int): Int {
