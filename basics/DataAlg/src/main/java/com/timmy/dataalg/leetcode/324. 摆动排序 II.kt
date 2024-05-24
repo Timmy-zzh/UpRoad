@@ -28,6 +28,36 @@ fun main() {
 }
 
 /**
+ * 2、解法：先排序后插入
+ * - 原数组用来存储在最后插入的值，所以需要复制一个相同元素的数组 arr
+ * - 接着对 arr 进行排序
+ * - 最后是根据摆动规则，对原数组进行元素插入，
+ * -- 从数组中间位置往前，不断获取元素，插入到目标数组的前面，接着要插入一个大的值的元素，这个元素从排序好的尾部获取，
+ * -- 中间位置和尾部位置获取的元素，都不断往前获取，而前面插入的目标数组，每次遍历都往前走两步
+ */
+fun wiggleSort(nums: IntArray): Unit {
+    val n = nums.size
+    val arr = Array(n) { 0 }
+    for (i in nums.indices) {
+        arr[i] = nums[i]
+    }
+    arr.sort()
+
+    val mid = (n + 1) / 2
+    var left = mid - 1
+    var right = n - 1
+    for (i in 0 until n step 2) {
+        nums[i] = arr[left]
+        if (i + 1 < n) {
+            nums[i + 1] = arr[right]
+        }
+        left--
+        right--
+    }
+    nums.print()
+}
+
+/**
  * 1、审题：
  * - 输入一个数组，要求对数组元素进行重新排列，最终结果是元素值的大小是波动排列的
  * - 位置0小，位置1大，位置2小，位置3大 。。。。
@@ -36,8 +66,9 @@ fun main() {
  * - 怎么做呢？？？
  * - 遇到相同大小的元素怎么处理？
  * - 回溯算法进行处理，遍历出所有可以的方案，然后进行裁剪，
+ * -- 超过时间限制了
  */
-fun wiggleSort(nums: IntArray): Unit {
+fun wiggleSort1(nums: IntArray): Unit {
     val n = nums.size
     val visited = Array(n) { false }
     val copyNums = Array(n) { 0 }     // 复制一份原始数组，数据不动的
@@ -54,8 +85,8 @@ fun wiggleSort(nums: IntArray): Unit {
     }
 
     println("last===========")
-    for (j in 0 until n){
-        nums[j]= resList324[j]
+    for (j in 0 until n) {
+        nums[j] = resList324[j]
     }
     nums.print()
 }
@@ -79,7 +110,7 @@ fun wiggleSortBack(nums: IntArray, copyNums: Array<Int>, visited: Array<Boolean>
     }
     if (count == n - 1) {   // 说明知道了最终的结果，不必再往下遍历了
         res324 = true
-        for (j in 0 until n){
+        for (j in 0 until n) {
             resList324.add(nums[j])
         }
         return
