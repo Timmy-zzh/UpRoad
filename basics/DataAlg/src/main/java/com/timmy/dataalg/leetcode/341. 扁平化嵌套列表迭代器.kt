@@ -35,45 +35,74 @@ fun main() {
 
 }
 
+/**
+ * 1、审题：
+ * - 题目说了，嵌套的整数列表 nestedList，每个元素要么是一个整数，要么是一个列表，
+ * - 列表中的元素和当前元素一样的构成，要么是一个整数，要么是列表这个格式
+ * - 现在要将这个列表的所有元素按照顺序找出来
+ * 2、解题：
+ * - 上面的整数列表，相当于一棵树结构，而且是多叉树
+ * - 那如何遍历这棵树的所有元素呢？深度优先遍历-dfs
+ */
 class NestedInteger {
-    val list = mutableListOf<Int>()
+    private var nestedList = mutableListOf<NestedInteger>()
+    private var mValue: Int = 0
 
-    constructor() {
-
-    }
+    constructor()
 
     constructor(value: Int) {
-        list.add(value)
+        mValue = value
     }
 
     fun isInteger(): Boolean {
-        return list.size == 1
+        return nestedList.isNotEmpty()
     }
 
     fun getInteger(): Int? {
-        return if (list.isEmpty()) null else list[0]
+        return if (nestedList.isEmpty()) mValue else null
     }
 
     fun setInteger(value: Int): Unit {
-        list[0] = value
+        mValue = value
     }
 
     fun add(ni: NestedInteger): Unit {
-
+        nestedList.add(ni)
     }
 
     fun getList(): List<NestedInteger>? {
-
+        return nestedList.ifEmpty { null }
     }
 }
 
 class NestedIterator(nestedList: List<NestedInteger>) {
+    private val intList = mutableListOf<Int>()
+    var iterator: MutableIterator<Int>
+
+    init {
+
+        dfs341(nestedList)
+        iterator = intList.iterator()
+    }
+
+    /**
+     * 不断dfs遍历，将树中所有结点添加到集合中
+     */
+    private fun dfs341(nestedList: List<NestedInteger>) {
+        nestedList.forEach {
+            if (it.isInteger()) {
+                intList.add(it.getInteger()!!)
+            } else {
+                dfs341(it.getList()!!)
+            }
+        }
+    }
 
     fun next(): Int {
-
+        return iterator.next()
     }
 
     fun hasNext(): Boolean {
-
+        return iterator.hasNext()
     }
 }
