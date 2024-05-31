@@ -23,8 +23,16 @@ import com.timmy.dataalg.print
 如果 nums1 的大小比 nums2 小，哪种方法更优？
 如果 nums2 的元素存储在磁盘上，内存是有限的，并且你不能一次加载所有的元素到内存中，你该怎么办？
  */
-fun main() { //    intersect(intArrayOf(1, 2, 2, 1), intArrayOf(2, 2))
-    intersect(intArrayOf(4, 7, 9, 7, 6, 7), intArrayOf(5, 0, 0, 6, 1, 6, 2, 2, 4))
+fun main() {
+    //    intersect(intArrayOf(1, 2, 2, 1), intArrayOf(2, 2))
+    //    intersect(intArrayOf(4, 7, 9, 7, 6, 7), intArrayOf(5, 0, 0, 6, 1, 6, 2, 2, 4))
+
+    var temp = 0
+
+    if ((temp++) / 3 == 0) {
+        println("aldfjlka")
+    }
+
 }
 
 /**
